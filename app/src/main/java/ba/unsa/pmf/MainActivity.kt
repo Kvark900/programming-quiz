@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val navController = this.findNavController(R.id.myNavHostFragment)
-        drawerLayout = binding.drawerLayout
+        drawerLayout = binding.drawerLayout //sideMenu
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout) //up button
         NavigationUI.setupWithNavController(binding.navView, navController)
     }

@@ -7,6 +7,7 @@ class GameViewModel : ViewModel() {
             val text: String,
             val answers: Map<String, Boolean>)
 
+    var jokerEnabled: Boolean = true
     var numOfCorrectAnswers = 0
     var questionIndex = 0
     lateinit var currentQuestion: Question

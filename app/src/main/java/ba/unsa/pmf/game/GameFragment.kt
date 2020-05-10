@@ -16,10 +16,10 @@
 
 package ba.unsa.pmf.game
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.provider.ContactsContract
+import android.view.*
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -44,19 +44,21 @@ class GameFragment : Fragment() {
         binding.game = gameViewModel
         initCheckBoxes()
         randomizeQuestions()
-        binding.submitButton.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-        { view: View ->
-            if (answeredCorrectly()) gameViewModel.numOfCorrectAnswers++
-            gameViewModel.questionIndex++
-            if (gameViewModel.questionIndex < gameSettingViewModel.settings.numberOfQuestions.number) {
-                resetCheckboxes()
-                setQuestion()
-                binding.invalidateAll()
-            } else {
-                view.findNavController().navigate(R.id.action_gameFragment_to_gameResultFragment)
-            }
-        }
+        binding.submitButton.setOnClickListener(submitButtonAction)
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    private val submitButtonAction = { view: View ->
+        if (answeredCorrectly()) gameViewModel.numOfCorrectAnswers++
+        gameViewModel.questionIndex++
+        if (gameViewModel.questionIndex < gameSettingViewModel.settings.numberOfQuestions.number) {
+            resetCheckboxes()
+            setQuestion()
+            binding.invalidateAll()
+        } else {
+            view.findNavController().navigate(R.id.action_gameFragment_to_gameResultFragment)
+        }
     }
 
     private fun initCheckBoxes() {
@@ -96,5 +98,35 @@ class GameFragment : Fragment() {
                 getString(R.string.title_android_trivia_question,
                         gameViewModel.questionIndex + 1,
                         gameSettingViewModel.settings.numberOfQuestions.number)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.game_menu, menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        if (gameViewModel.jokerEnabled) enableJoker(menu.getItem(0))
+        else disableJoker(menu.getItem(0))
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (!gameViewModel.jokerEnabled) return true
+        val intent = Intent(Intent.ACTION_VIEW, ContactsContract.Contacts.CONTENT_URI)
+        startActivity(intent)
+        disableJoker(item)
+        return true
+    }
+
+    private fun disableJoker(item: MenuItem) {
+        gameViewModel.jokerEnabled = false
+        item.icon.alpha = 130
+        item.isEnabled = false
+    }
+
+    private fun enableJoker(item: MenuItem) {
+        gameViewModel.jokerEnabled = true
+        item.icon.alpha = 255
+        item.isEnabled = true
     }
 }

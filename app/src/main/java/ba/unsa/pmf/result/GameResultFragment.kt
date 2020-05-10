@@ -38,11 +38,9 @@ class GameResultFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         val binding: FragmentGameResultBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_game_result, container, false)
 
-        val level = gameSettingsViewModel.settings.level.id
         val numberOfQuestions = gameSettingsViewModel.settings.numberOfQuestions.number
         val numOfCorrectAnswers = gameViewModel.numOfCorrectAnswers
         val percent = numOfCorrectAnswers.toDouble() / numberOfQuestions * 100
@@ -52,8 +50,7 @@ class GameResultFragment : Fragment() {
         binding.percentageText.text = "${percent}%"
         binding.nextMatchButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_gameResultFragment_to_gameSettingsFragment)
-            gameViewModel.numOfCorrectAnswers = 0
-            gameViewModel.questionIndex = 0
+            resetGameData()
         }
         setHasOptionsMenu(true)
         return binding.root
@@ -75,5 +72,9 @@ class GameResultFragment : Fragment() {
         return true
     }
 
-
+    private fun resetGameData() {
+        gameViewModel.numOfCorrectAnswers = 0
+        gameViewModel.questionIndex = 0
+        gameViewModel.jokerEnabled = true
+    }
 }
