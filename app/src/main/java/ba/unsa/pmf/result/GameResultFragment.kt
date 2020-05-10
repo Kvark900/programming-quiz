@@ -1,5 +1,3 @@
-
-
 package ba.unsa.pmf.result
 
 import android.content.Intent
@@ -48,6 +46,7 @@ class GameResultFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId != R.id.share) return false
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, resultMessageText)
