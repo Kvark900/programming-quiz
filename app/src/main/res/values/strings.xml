@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Android Trivia</string>
+  <string name="app_name">PMF Quiz</string>
   <string name="game_over">Game Over</string>
   <string name="try_again">Try Again?</string>
   <string name="position">Position</string>
@@ -10,7 +10,9 @@
   <string name="rules">Rules</string>
   <string name="about">About</string>
   <string name="trivia_hint">Trivia Hint</string>
-  <string name="title_android_trivia_question">Android Trivia (%1$d/%2$d)</string>
+  <string name="title_programming_question">Programming Quiz (%1$d/%2$d)</string>
+  <string name="title_results">Results</string>
+  <string name="title_settings">Settings</string>
   <string name="title_about_trivia">About Trivia</string>
   <string name="title_trivia_rules">Trivia Rules</string>
   <string name="share_success_text">I mastered #UdacityAndroidTrivia with %1$d/%2$d correct questions!</string>

@@ -42,6 +42,7 @@ class GameFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
         binding.game = gameViewModel
+        setTitle()
         initCheckBoxes()
         randomizeQuestions()
         binding.submitButton.setOnClickListener(submitButtonAction)
@@ -94,8 +95,12 @@ class GameFragment : Fragment() {
         gameViewModel.currentQuestion = gameViewModel.questions[gameViewModel.questionIndex]
         gameViewModel.answers = gameViewModel.currentQuestion.answers.keys.toMutableList()
         gameViewModel.answers.shuffle()
+        setTitle()
+    }
+
+    private fun setTitle() {
         (activity as AppCompatActivity).supportActionBar?.title =
-                getString(R.string.title_android_trivia_question,
+                getString(R.string.title_programming_question,
                         gameViewModel.questionIndex + 1,
                         gameSettingViewModel.settings.numberOfQuestions.number)
     }

@@ -2,6 +2,7 @@ package ba.unsa.pmf.settings
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,12 +23,25 @@ class GameSettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game_settings, container, false)
+        setTitle()
+
         binding.playButton.setOnClickListener{ view: View ->
             initSettings()
             view.findNavController().navigate(R.id.action_gameSettingsFragment_to_gameFragment)
         }
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,
+                requireView().findNavController())
+                || super.onOptionsItemSelected(item)
     }
 
     private fun initSettings() {
@@ -45,14 +59,7 @@ class GameSettingsFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.options_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item,
-                requireView().findNavController())
-                || super.onOptionsItemSelected(item)
+    private fun setTitle() {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_settings)
     }
 }

@@ -19,16 +19,15 @@ package ba.unsa.pmf.result
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import ba.unsa.pmf.R
 import ba.unsa.pmf.databinding.FragmentGameResultBinding
 import ba.unsa.pmf.game.GameViewModel
 import ba.unsa.pmf.settings.GameSettingsViewModel
-import kotlin.math.log
 
 class GameResultFragment : Fragment() {
     private val gameViewModel: GameViewModel by activityViewModels()
@@ -45,6 +44,7 @@ class GameResultFragment : Fragment() {
         val numOfCorrectAnswers = gameViewModel.numOfCorrectAnswers
         val percent = numOfCorrectAnswers.toDouble() / numberOfQuestions * 100
         resultMessageText = "${numOfCorrectAnswers}/${numberOfQuestions} correct answers"
+        setTittle()
 
         binding.resultMessage.text = resultMessageText
         binding.percentageText.text = "${percent}%"
@@ -58,7 +58,7 @@ class GameResultFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.winner_menu, menu)
+        inflater.inflate(R.menu.results_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -70,6 +70,10 @@ class GameResultFragment : Fragment() {
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
         return true
+    }
+
+    private fun setTittle() {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_results)
     }
 
     private fun resetGameData() {
