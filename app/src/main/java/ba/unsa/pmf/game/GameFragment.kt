@@ -1,19 +1,3 @@
-/*
- * Copyright 2018, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package ba.unsa.pmf.game
 
 import android.content.Intent
@@ -111,12 +95,13 @@ class GameFragment : Fragment() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        if (gameViewModel.jokerEnabled) enableJoker(menu.getItem(0))
-        else disableJoker(menu.getItem(0))
+        if (gameViewModel.jokerEnabled) enableJoker(menu.findItem(R.id.jokerButton))
+        else disableJoker(menu.findItem(R.id.jokerButton))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (!gameViewModel.jokerEnabled) return true
+        if (item.itemId != R.id.jokerButton) return false
+        if (!gameViewModel.jokerEnabled) return false
         val intent = Intent(Intent.ACTION_VIEW, ContactsContract.Contacts.CONTENT_URI)
         startActivity(intent)
         disableJoker(item)
@@ -124,12 +109,14 @@ class GameFragment : Fragment() {
     }
 
     private fun disableJoker(item: MenuItem) {
+        if (item.itemId != R.id.jokerButton) return
         gameViewModel.jokerEnabled = false
         item.icon.alpha = 130
         item.isEnabled = false
     }
 
     private fun enableJoker(item: MenuItem) {
+        if (item.itemId != R.id.jokerButton) return
         gameViewModel.jokerEnabled = true
         item.icon.alpha = 255
         item.isEnabled = true
