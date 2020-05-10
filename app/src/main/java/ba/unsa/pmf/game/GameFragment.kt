@@ -20,11 +20,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import ba.unsa.pmf.R
 import ba.unsa.pmf.databinding.FragmentGameBinding
@@ -33,6 +33,7 @@ import ba.unsa.pmf.settings.GameSettingsViewModel
 
 class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
+    private lateinit var checkBoxes: List<CheckBox>
     private val gameViewModel: GameViewModel by activityViewModels()
     private val gameSettingViewModel: GameSettingsViewModel by activityViewModels()
 
@@ -41,19 +42,30 @@ class GameFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
         binding.game = gameViewModel
+        initCheckBoxes()
         randomizeQuestions()
         binding.submitButton.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
         { view: View ->
             if (answeredCorrectly()) gameViewModel.numOfCorrectAnswers++
             gameViewModel.questionIndex++
             if (gameViewModel.questionIndex < gameSettingViewModel.settings.numberOfQuestions.number) {
+                resetCheckboxes()
                 setQuestion()
                 binding.invalidateAll()
             } else {
-                view.findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+                view.findNavController().navigate(R.id.action_gameFragment_to_gameResultFragment)
             }
         }
         return binding.root
+    }
+
+    private fun initCheckBoxes() {
+        checkBoxes = listOf(
+                binding.firstAnswerCheckbox,
+                binding.secondAnswerCheckbox,
+                binding.thirdAnswerCheckbox,
+                binding.fourthAnswerCheckbox
+        )
     }
 
     private fun answeredCorrectly(): Boolean {
@@ -61,22 +73,19 @@ class GameFragment : Fragment() {
     }
 
     private fun getSelectedAnswers(): HashSet<String> {
-        val selectedAnswers = HashSet<String>()
-        if (binding.firstAnswerCheckbox.isChecked)
-            selectedAnswers.add(binding.firstAnswerCheckbox.text.toString())
-        if (binding.secondAnswerCheckbox.isChecked)
-            selectedAnswers.add(binding.secondAnswerCheckbox.text.toString())
-        if (binding.thirdAnswerCheckbox.isChecked)
-            selectedAnswers.add(binding.thirdAnswerCheckbox.text.toString())
-        if (binding.fourthAnswerCheckbox.isChecked)
-            selectedAnswers.add(binding.fourthAnswerCheckbox.text.toString())
-        return selectedAnswers
+        return checkBoxes.filter { checkBox -> checkBox.isChecked }.map { checkBox ->
+            checkBox.text.toString()
+        }.toHashSet()
     }
 
     private fun randomizeQuestions() {
         gameViewModel.questions.shuffle()
         gameViewModel.questionIndex = 0
         setQuestion()
+    }
+
+    private fun resetCheckboxes() {
+        checkBoxes.forEach { checkBox: CheckBox -> checkBox.isChecked = false }
     }
 
     private fun setQuestion() {

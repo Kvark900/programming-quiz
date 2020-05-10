@@ -20,7 +20,7 @@
       tools:layout="@layout/fragment_game"
       android:label="GameFragment" >
     <action
-        android:id="@+id/action_gameFragment_to_gameWonFragment"
+        android:id="@+id/action_gameFragment_to_gameResultFragment"
         app:destination="@id/gameResultFragment"
         app:popUpTo="@id/gameFragment"
         app:popUpToInclusive="true" />

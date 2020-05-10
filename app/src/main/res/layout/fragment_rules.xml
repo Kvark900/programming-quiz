@@ -8,6 +8,7 @@
     android:fillViewport="true"
     tools:context="ba.unsa.pmf.RulesFragment">
 
+<!--
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,4 +38,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rulesImage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+-->
 </ScrollView>

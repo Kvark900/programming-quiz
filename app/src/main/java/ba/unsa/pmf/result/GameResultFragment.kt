@@ -49,6 +49,8 @@ class GameResultFragment : Fragment() {
         binding.percentageText.text = "${percent}%"
         binding.nextMatchButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_gameResultFragment_to_gameSettingsFragment)
+            gameViewModel.numOfCorrectAnswers = 0
+            gameViewModel.questionIndex = 0
         }
         return binding.root
     }

@@ -9,7 +9,7 @@
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/navHeaderImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -22,6 +22,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/nav_header" />
+        app:srcCompat="@drawable/nav_header" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
