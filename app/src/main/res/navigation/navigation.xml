@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/gameSettingsFragment">
+    app:startDestination="@id/gameLevelFragment">
 
+<!--
   <fragment
       android:id="@+id/gameSettingsFragment"
       android:name="ba.unsa.pmf.settings.GameSettingsFragment"
@@ -14,6 +15,28 @@
         android:id="@+id/action_gameSettingsFragment_to_gameFragment"
         app:destination="@id/gameFragment" />
   </fragment>
+-->
+  <fragment
+      android:id="@+id/gameLevelFragment"
+      android:name="ba.unsa.pmf.settings.GameLevelFragment"
+      android:label="fragment_game_level"
+      tools:layout="@layout/fragment_game_level" >
+    <action
+        android:id="@+id/action_gameLevelFragment_to_numberOfQuestionsFragment"
+        app:destination="@id/numberOfQuestionsFragment"
+        app:popUpTo="@id/gameLevelFragment" />
+  </fragment>
+  <fragment
+      android:id="@+id/numberOfQuestionsFragment"
+      android:name="ba.unsa.pmf.settings.NumberOfQuestionsFragment"
+      android:label="fragment_number_of_questions"
+      tools:layout="@layout/fragment_number_of_questions" >
+    <action
+        android:id="@+id/action_numberOfQuestionsFragment_to_gameFragment"
+        app:destination="@id/gameFragment"
+        app:popUpTo="@id/gameLevelFragment" />
+  </fragment>
+
   <fragment
       android:id="@+id/gameFragment"
       android:name="ba.unsa.pmf.game.GameFragment"
@@ -22,7 +45,7 @@
     <action
         android:id="@+id/action_gameFragment_to_gameResultFragment"
         app:destination="@id/gameResultFragment"
-        app:popUpTo="@id/gameFragment"
+        app:popUpTo="@id/numberOfQuestionsFragment"
         app:popUpToInclusive="true" />
   </fragment>
   <fragment
@@ -31,9 +54,9 @@
       android:label="fragment_game_result"
       tools:layout="@layout/fragment_game_result" >
     <action
-        android:id="@+id/action_gameResultFragment_to_gameSettingsFragment"
-        app:destination="@id/gameSettingsFragment"
-        app:popUpTo="@id/gameSettingsFragment" />
+        android:id="@+id/action_gameResultFragment_to_gameLevelFragment"
+        app:destination="@id/gameLevelFragment"
+        app:popUpTo="@id/gameLevelFragment" />
   </fragment>
   <fragment
       android:id="@+id/aboutFragment"

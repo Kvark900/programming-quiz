@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ba.unsa.pmf.settings.NumberOfQuestionsFragment">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/titleConstraint"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/pmfLogo"
+        android:layout_width="337dp"
+        android:layout_height="195dp"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/transparent_logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="262dp"
+        android:layout_height="71dp"
+        android:fontFamily="sans-serif"
+        android:text="BROJ PITANJA"
+        android:textColor="#4f5b66"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pmfLogo"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <RadioGroup
+        android:id="@+id/numOfQuestionsRadioGroup"
+        android:layout_width="271dp"
+        android:layout_height="179dp"
+        android:layout_marginStart="@dimen/question_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.671"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.039">
+
+      <RadioButton
+          android:id="@+id/easyLevelRadioButton"
+          android:layout_width="match_parent"
+          android:layout_height="53dp"
+          android:layout_marginBottom="@dimen/question_vertical_margin"
+          android:checked="true"
+          android:text="5"
+          android:textColor="#4f5b66"
+          android:textSize="24sp"
+          android:textStyle="bold"
+          tools:text="5" />
+
+      <RadioButton
+          android:id="@+id/mediumLevelRadioButton"
+          android:layout_width="match_parent"
+          android:layout_height="53dp"
+          android:layout_marginBottom="@dimen/question_vertical_margin"
+          android:text="10"
+          android:textColor="#4f5b66"
+          android:textSize="24sp"
+          android:textStyle="bold"
+          tools:text="10" />
+
+      <RadioButton
+          android:id="@+id/hardLevelRadioButton"
+          android:layout_width="match_parent"
+          android:layout_height="53dp"
+          android:layout_marginBottom="@dimen/question_vertical_margin"
+          android:text="15"
+          android:textColor="#4f5b66"
+          android:textSize="24sp"
+          android:textStyle="bold"
+          tools:text="15" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/levelNextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:paddingStart="@dimen/button_padding"
+        android:paddingEnd="@dimen/button_padding"
+        android:text="PLAY"
+        android:textColor="	#4f5b66"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numOfQuestionsRadioGroup"
+        app:layout_constraintVertical_bias="0.61" />
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -33,7 +33,7 @@ class GameResultFragment : Fragment() {
         binding.resultMessage.text = resultMessageText
         binding.percentageText.text = "${percent}%"
         binding.nextMatchButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_gameResultFragment_to_gameSettingsFragment)
+            view.findNavController().navigate(R.id.action_gameResultFragment_to_gameLevelFragment)
             resetGameData()
         }
         setHasOptionsMenu(true)

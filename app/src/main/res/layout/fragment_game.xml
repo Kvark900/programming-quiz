@@ -5,7 +5,6 @@
     tools:context="ba.unsa.pmf.InGame">
 
   <data>
-
     <variable
         name="game"
         type="ba.unsa.pmf.game.GameViewModel" />
