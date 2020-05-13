@@ -12,9 +12,6 @@ import ba.unsa.pmf.R
 import ba.unsa.pmf.databinding.FragmentGameLevelBinding
 import ba.unsa.pmf.databinding.FragmentGameSettingsBinding
 
-/**
- * A simple [Fragment] subclass.
- */
 class GameLevelFragment : Fragment() {
     private lateinit var binding: FragmentGameLevelBinding
     private val gameSettingViewModel: GameSettingsViewModel by activityViewModels()

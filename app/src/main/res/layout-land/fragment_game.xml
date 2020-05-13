@@ -5,6 +5,7 @@
     tools:context="ba.unsa.pmf.InGame">
 
   <data>
+
     <variable
         name="game"
         type="ba.unsa.pmf.game.GameViewModel" />
@@ -29,49 +30,53 @@
           android:layout_marginEnd="@dimen/question_horizontal_margin"
           android:fontFamily="sans-serif"
           android:text="@{game.currentQuestion.text}"
-          android:textSize="@dimen/question_text_size"
+          android:textSize="24sp"
           android:textStyle="bold"
           android:typeface="normal"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          tools:text="What color is the Android mascot?" />
+          tools:text="Which of the following function convert a string to a float in python?" />
 
       <LinearLayout
           android:id="@+id/checkboxGroup"
-          android:layout_width="270dp"
-          android:layout_height="197dp"
+          android:layout_width="490dp"
+          android:layout_height="wrap_content"
           android:orientation="vertical"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.497"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/questionText"
-          app:layout_constraintVertical_bias="0.13">
+          app:layout_constraintVertical_bias="0.084">
 
         <CheckBox
             android:id="@+id/first_answer_checkbox"
             android:layout_width="match_parent"
             android:layout_height="47dp"
+            android:layout_marginBottom="6dp"
             android:text="@{game.answers[0]}"
             android:textSize="@dimen/answer_text_size"
-            tools:text="Blue" />
+            tools:text="A function or method which is defined using async def is called a coroutine function." />
 
         <CheckBox
             android:id="@+id/second_answer_checkbox"
             android:layout_width="match_parent"
             android:layout_height="47dp"
+            android:layout_marginBottom="6dp"
             android:text="@{game.answers[1]}"
             android:textSize="@dimen/answer_text_size"
-            tools:text="Blue" />
+            tools:text="A function or method which is defined using async def is called a coroutine function." />
 
         <CheckBox
             android:id="@+id/third_answer_checkbox"
             android:layout_width="match_parent"
             android:layout_height="47dp"
+            android:layout_marginBottom="6dp"
             android:text="@{game.answers[2]}"
             android:textSize="@dimen/answer_text_size"
-            tools:text="Blue" />
+            tools:text="A function or method which is defined using async def is called a coroutine function." />
 
         <CheckBox
             android:id="@+id/fourth_answer_checkbox"
@@ -79,7 +84,7 @@
             android:layout_height="47dp"
             android:text="@{game.answers[3]}"
             android:textSize="@dimen/answer_text_size"
-            tools:text="Blue" />
+            tools:text="A function or method which is defined using async def is called a coroutine function." />
       </LinearLayout>
 
       <Button
@@ -94,7 +99,7 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/checkboxGroup"
-          app:layout_constraintVertical_bias="0.32999998" />
+          app:layout_constraintVertical_bias="0.101" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>

@@ -56,7 +56,8 @@ class GameFragment : Fragment() {
     }
 
     private fun answeredCorrectly(): Boolean {
-        return getSelectedAnswers().containsAll(gameViewModel.getCorrectOptions())
+        return (getSelectedAnswers().size == gameViewModel.getCorrectOptions().size &&
+                (getSelectedAnswers() - gameViewModel.getCorrectOptions()).isEmpty())
     }
 
     private fun getSelectedAnswers(): HashSet<String> {

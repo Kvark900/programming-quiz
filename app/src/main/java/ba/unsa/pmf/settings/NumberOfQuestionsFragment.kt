@@ -42,7 +42,6 @@ class NumberOfQuestionsFragment : Fragment() {
     }
 
     private fun initSettings() {
-        gameSettingViewModel.settings = GameSettingsViewModel.Settings(GameSettingsViewModel.Level.EASY, GameSettingsViewModel.NumberOfQuestions.FIVE)
         when (binding.numOfQuestionsRadioGroup?.checkedRadioButtonId) {
             R.id.fiveQuestionsRadioButton -> gameSettingViewModel.settings.numberOfQuestions = GameSettingsViewModel.NumberOfQuestions.FIVE
             R.id.tenQuestionsRadioButton -> gameSettingViewModel.settings.numberOfQuestions = GameSettingsViewModel.NumberOfQuestions.TEN
