@@ -3,13 +3,12 @@ package ba.unsa.pmf.settings
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import ba.unsa.pmf.R
-import ba.unsa.pmf.databinding.FragmentGameLevelBinding
 import ba.unsa.pmf.databinding.FragmentNumberOfQuestionsBinding
 
 /**
@@ -18,6 +17,7 @@ import ba.unsa.pmf.databinding.FragmentNumberOfQuestionsBinding
 class NumberOfQuestionsFragment : Fragment() {
     private lateinit var binding: FragmentNumberOfQuestionsBinding
     private val gameSettingViewModel: GameSettingsViewModel by activityViewModels()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

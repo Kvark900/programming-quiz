@@ -28,7 +28,8 @@ class GameFragment : Fragment() {
         binding.game = gameViewModel
         setTitle()
         initCheckBoxes()
-        randomizeQuestions()
+        gameViewModel.initQuestions(gameSettingViewModel.settings.level, gameSettingViewModel.settings.numberOfQuestions.number)
+//        randomizeQuestions()
         binding.submitButton.setOnClickListener(submitButtonAction)
         setHasOptionsMenu(true)
         return binding.root
@@ -40,6 +41,7 @@ class GameFragment : Fragment() {
         if (gameViewModel.questionIndex < gameSettingViewModel.settings.numberOfQuestions.number) {
             resetCheckboxes()
             setQuestion()
+            setTitle()
             binding.invalidateAll()
         } else {
             view.findNavController().navigate(R.id.action_gameFragment_to_gameResultFragment)
@@ -67,9 +69,9 @@ class GameFragment : Fragment() {
     }
 
     private fun randomizeQuestions() {
-        gameViewModel.questions.shuffle()
-        gameViewModel.questionIndex = 0
-        setQuestion()
+//        gameViewModel.questionsRepository.shuffle()
+//        gameViewModel.questionIndex = 0
+//        setQuestion()
     }
 
     private fun resetCheckboxes() {
