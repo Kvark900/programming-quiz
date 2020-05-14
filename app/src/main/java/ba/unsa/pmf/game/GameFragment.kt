@@ -1,13 +1,16 @@
 package ba.unsa.pmf.game
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,6 +18,7 @@ import androidx.navigation.findNavController
 import ba.unsa.pmf.R
 import ba.unsa.pmf.databinding.FragmentGameBinding
 import ba.unsa.pmf.settings.GameSettingsViewModel
+import kotlinx.android.synthetic.main.fragment_game.view.*
 
 
 class GameFragment : Fragment() {
@@ -41,14 +45,35 @@ class GameFragment : Fragment() {
         if (answeredCorrectly()) gameVM.numOfCorrectAnswers++
         gameVM.questionIndex++
         if (gameVM.questionIndex < gameSettingVM.settings.numberOfQuestions.number) {
-            resetCheckboxes()
+            resetAnswers()
             setQuestion()
             renderQuestion()
             setTitle()
             binding.invalidateAll()
+            view?.hideKeyboard()
         } else {
             view.findNavController().navigate(R.id.action_gameFragment_to_gameResultFragment)
+            view?.hideKeyboard()
         }
+    }
+
+    private fun answeredCorrectly(): Boolean {
+        return when (gameVM.currentQuestion.type) {
+            GameViewModel.QuestionType.OPEN -> wroteCorrectly()
+            else -> chosenCorretly()
+        }
+    }
+
+    private fun wroteCorrectly(): Boolean {
+        val currQuestion = gameVM.currentQuestion
+        if (currQuestion.type != GameViewModel.QuestionType.OPEN) return false
+        val answer: String? = binding.textAnswer?.text?.toString()?.trim()
+        return currQuestion.answers.keys.find { s -> s.trim().equals(answer, true) } != null
+    }
+
+    private fun chosenCorretly(): Boolean {
+        return (getSelectedAnswers().size == gameVM.getCorrectOptions().size &&
+                (getSelectedAnswers() - gameVM.getCorrectOptions()).isEmpty())
     }
 
     private fun initCheckBoxes() {
@@ -62,15 +87,10 @@ class GameFragment : Fragment() {
 
     private fun renderQuestion() {
         val isOpen = gameVM.currentQuestion.type == GameViewModel.QuestionType.OPEN
-        binding.checkboxGroup.isVisible = !isOpen
-        binding.textAnswer?.isVisible = isOpen
+        binding.checkboxGroup.visibility  = if (isOpen) GONE else VISIBLE
+        binding.textAnswer?.visibility = if (isOpen) VISIBLE else GONE
         val params = binding.submitButton.layoutParams as ConstraintLayout.LayoutParams
         params.topToBottom = if (isOpen) binding.textAnswer?.id!! else binding.checkboxGroup.id
-    }
-
-    private fun answeredCorrectly(): Boolean {
-        return (getSelectedAnswers().size == gameVM.getCorrectOptions().size &&
-                (getSelectedAnswers() - gameVM.getCorrectOptions()).isEmpty())
     }
 
     private fun getSelectedAnswers(): HashSet<String> {
@@ -79,8 +99,9 @@ class GameFragment : Fragment() {
         }.toHashSet()
     }
 
-    private fun resetCheckboxes() {
+    private fun resetAnswers() {
         checkBoxes.forEach { checkBox: CheckBox -> checkBox.isChecked = false }
+        binding.textAnswer?.text?.clear()
     }
 
     private fun setQuestion() {
@@ -128,5 +149,10 @@ class GameFragment : Fragment() {
         gameVM.jokerEnabled = true
         item.icon.alpha = 255
         item.isEnabled = true
+    }
+
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 }

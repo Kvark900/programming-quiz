@@ -43,6 +43,36 @@ class GameViewModel : ViewModel() {
                             "It continues the nearest enclosing loop" to false,
                             "It terminates the function recursion" to false,
                             "It terminates the database call" to false)),
+            Question(text = "What is 'pass' statement",
+                    difficult = Level.EASY,
+                    type = QuestionType.MULTIPLE_CHOICE,
+                    answers = mapOf("pass is a null operation — when it is executed, nothing happens" to true,
+                            "pass is recursive function call" to false,
+                            "pass terminates function execution" to false,
+                            "pass terminates loop" to false)),
+            Question(text = "What does 'continue' statement",
+                    difficult = Level.EASY,
+                    type = QuestionType.MULTIPLE_CHOICE,
+                    answers = mapOf("It continues with the next cycle of the nearest enclosing loop" to true,
+                            "It continues with the next cycle of the nearest function" to false,
+                            "It continues function recursion" to false,
+                            "It breaks the next cycle of the nearest enclosing loop" to false)),
+            Question(text = "______ expressions are used to create anonymous functions",
+                    difficult = Level.EASY,
+                    type = QuestionType.OPEN,
+                    answers = mapOf("Lambda" to true)),
+            Question(text = "The '&' operator yields the bitwise ___ of its arguments, which must be integers.",
+                    difficult = Level.EASY,
+                    type = QuestionType.OPEN,
+                    answers = mapOf("and" to true)),
+            Question(text = "The '/' (division) and '//' (floor division) operators yield the ________ of their arguments",
+                    difficult = Level.EASY,
+                    type = QuestionType.OPEN,
+                    answers = mapOf("quotient" to true)),
+            Question(text = "The '^' operator yields the bitwise ___ of its arguments, which must be integers.",
+                    difficult = Level.MEDIUM,
+                    type = QuestionType.OPEN,
+                    answers = mapOf("XOR" to true, "exclusive OR" to true)),
             Question(text = "Which of the following function convert a string to a float in python?",
                     difficult = Level.MEDIUM,
                     type = QuestionType.MULTIPLE_CHOICE,
@@ -62,20 +92,13 @@ class GameViewModel : ViewModel() {
                             "Sets" to false,
                             "Lists" to false,
                             "Tuples" to false)),
-            Question(text = "What is 'pass' statement",
+            Question(text = "What are sets?",
                     difficult = Level.MEDIUM,
                     type = QuestionType.MULTIPLE_CHOICE,
-                    answers = mapOf("pass is a null operation — when it is executed, nothing happens" to true,
-                            "pass is recursive function call" to false,
-                            "pass terminates function execution" to false,
-                            "pass terminates loop" to false)),
-            Question(text = "What does 'continue' statement",
-                    difficult = Level.MEDIUM,
-                    type = QuestionType.MULTIPLE_CHOICE,
-                    answers = mapOf("It continues with the next cycle of the nearest enclosing loop" to true,
-                            "It continues with the next cycle of the nearest function" to false,
-                            "It continues function recursion" to false,
-                            "It breaks the next cycle of the nearest enclosing loop" to false)),
+                    answers = mapOf("These represent unordered, finite sets of unique, immutable objects" to true,
+                            "These represent ordered, finite sets of unique, immutable objects" to false,
+                            "These represent ordered, infinite sets of unique, immutable objects" to false,
+                            "These represent unordered, finite sets of unique, mutable objects" to false)),
             Question(text = "Which operator is overloaded by the or() function?",
                     difficult = Level.HARD,
                     type = QuestionType.MULTIPLE_CHOICE,
@@ -88,13 +111,6 @@ class GameViewModel : ViewModel() {
                     difficult = Level.HARD,
                     type = QuestionType.MULTIPLE_CHOICE,
                     answers = mapOf("Lists" to true, "Byte Arrays" to true, "Tuples" to false, "Strings" to false)),
-            Question(text = "What are sets?",
-                    difficult = Level.MEDIUM,
-                    type = QuestionType.MULTIPLE_CHOICE,
-                    answers = mapOf("These represent unordered, finite sets of unique, immutable objects" to true,
-                            "These represent ordered, finite sets of unique, immutable objects" to false,
-                            "These represent ordered, infinite sets of unique, immutable objects" to false,
-                            "These represent unordered, finite sets of unique, mutable objects" to false)),
             Question(text = "What are mappings?",
                     difficult = Level.HARD,
                     type = QuestionType.MULTIPLE_CHOICE,
@@ -124,11 +140,17 @@ class GameViewModel : ViewModel() {
                     Level.HARD to mapOf(Level.HARD to .50, Level.MEDIUM to .25, Level.EASY to .25)
             )
 
-
     fun initQuestions(level: Level, numOfQ: Int) {
         groupQuestions()
         shuffleQuestions()
+        distributeQuestions(level, numOfQ)
+        questions.shuffle()
+        currentQuestion = questions[questionIndex]
+        answers = currentQuestion.answers.keys.toMutableList()
+        answers.shuffle()
+    }
 
+    private fun distributeQuestions(level: Level, numOfQ: Int) {
         val numOfEasy = dist(level, Level.EASY)?.times(numOfQ)?.toInt()?.plus(1)
         val numOfMedium = dist(level, Level.MEDIUM)?.times(numOfQ)?.toInt()?.plus(1)
         val numOfHard = dist(level, Level.HARD)?.times(numOfQ)?.toInt()?.plus(1)
@@ -137,11 +159,6 @@ class GameViewModel : ViewModel() {
                     mediumQuestions.subList(0, numOfMedium!!) +
                     hardQuestions.subList(0, numOfHard!!))
                     .toMutableList()
-
-        questions.shuffle()
-        currentQuestion = questions[questionIndex]
-        answers = currentQuestion.answers.keys.toMutableList()
-        answers.shuffle()
     }
 
     private fun dist(level: Level, questionLevel: Level): Double? {
