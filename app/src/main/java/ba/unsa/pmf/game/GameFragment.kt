@@ -6,6 +6,8 @@ import android.provider.ContactsContract
 import android.view.*
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,29 +20,30 @@ import ba.unsa.pmf.settings.GameSettingsViewModel
 class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
     private lateinit var checkBoxes: List<CheckBox>
-    private val gameViewModel: GameViewModel by activityViewModels()
-    private val gameSettingViewModel: GameSettingsViewModel by activityViewModels()
+    private val gameVM: GameViewModel by activityViewModels()
+    private val gameSettingVM: GameSettingsViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
-        binding.game = gameViewModel
+        binding.game = gameVM
         setTitle()
         initCheckBoxes()
-        gameViewModel.initQuestions(gameSettingViewModel.settings.level, gameSettingViewModel.settings.numberOfQuestions.number)
-//        randomizeQuestions()
+        gameVM.initQuestions(gameSettingVM.settings.level, gameSettingVM.settings.numberOfQuestions.number)
+        renderQuestion()
         binding.submitButton.setOnClickListener(submitButtonAction)
         setHasOptionsMenu(true)
         return binding.root
     }
 
     private val submitButtonAction = { view: View ->
-        if (answeredCorrectly()) gameViewModel.numOfCorrectAnswers++
-        gameViewModel.questionIndex++
-        if (gameViewModel.questionIndex < gameSettingViewModel.settings.numberOfQuestions.number) {
+        if (answeredCorrectly()) gameVM.numOfCorrectAnswers++
+        gameVM.questionIndex++
+        if (gameVM.questionIndex < gameSettingVM.settings.numberOfQuestions.number) {
             resetCheckboxes()
             setQuestion()
+            renderQuestion()
             setTitle()
             binding.invalidateAll()
         } else {
@@ -57,9 +60,17 @@ class GameFragment : Fragment() {
         )
     }
 
+    private fun renderQuestion() {
+        val isOpen = gameVM.currentQuestion.type == GameViewModel.QuestionType.OPEN
+        binding.checkboxGroup.isVisible = !isOpen
+        binding.textAnswer?.isVisible = isOpen
+        val params = binding.submitButton.layoutParams as ConstraintLayout.LayoutParams
+        params.topToBottom = if (isOpen) binding.textAnswer?.id!! else binding.checkboxGroup.id
+    }
+
     private fun answeredCorrectly(): Boolean {
-        return (getSelectedAnswers().size == gameViewModel.getCorrectOptions().size &&
-                (getSelectedAnswers() - gameViewModel.getCorrectOptions()).isEmpty())
+        return (getSelectedAnswers().size == gameVM.getCorrectOptions().size &&
+                (getSelectedAnswers() - gameVM.getCorrectOptions()).isEmpty())
     }
 
     private fun getSelectedAnswers(): HashSet<String> {
@@ -68,28 +79,22 @@ class GameFragment : Fragment() {
         }.toHashSet()
     }
 
-    private fun randomizeQuestions() {
-//        gameViewModel.questionsRepository.shuffle()
-//        gameViewModel.questionIndex = 0
-//        setQuestion()
-    }
-
     private fun resetCheckboxes() {
         checkBoxes.forEach { checkBox: CheckBox -> checkBox.isChecked = false }
     }
 
     private fun setQuestion() {
-        gameViewModel.currentQuestion = gameViewModel.questions[gameViewModel.questionIndex]
-        gameViewModel.answers = gameViewModel.currentQuestion.answers.keys.toMutableList()
-        gameViewModel.answers.shuffle()
+        gameVM.currentQuestion = gameVM.questions[gameVM.questionIndex]
+        gameVM.answers = gameVM.currentQuestion.answers.keys.toMutableList()
+        gameVM.answers.shuffle()
         setTitle()
     }
 
     private fun setTitle() {
         (activity as AppCompatActivity).supportActionBar?.title =
                 getString(R.string.title_programming_question,
-                        gameViewModel.questionIndex + 1,
-                        gameSettingViewModel.settings.numberOfQuestions.number)
+                        gameVM.questionIndex + 1,
+                        gameSettingVM.settings.numberOfQuestions.number)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -98,13 +103,13 @@ class GameFragment : Fragment() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        if (gameViewModel.jokerEnabled) enableJoker(menu.findItem(R.id.jokerButton))
+        if (gameVM.jokerEnabled) enableJoker(menu.findItem(R.id.jokerButton))
         else disableJoker(menu.findItem(R.id.jokerButton))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId != R.id.jokerButton) return false
-        if (!gameViewModel.jokerEnabled) return false
+        if (!gameVM.jokerEnabled) return false
         val intent = Intent(Intent.ACTION_VIEW, ContactsContract.Contacts.CONTENT_URI)
         startActivity(intent)
         disableJoker(item)
@@ -113,14 +118,14 @@ class GameFragment : Fragment() {
 
     private fun disableJoker(item: MenuItem) {
         if (item.itemId != R.id.jokerButton) return
-        gameViewModel.jokerEnabled = false
+        gameVM.jokerEnabled = false
         item.icon.alpha = 130
         item.isEnabled = false
     }
 
     private fun enableJoker(item: MenuItem) {
         if (item.itemId != R.id.jokerButton) return
-        gameViewModel.jokerEnabled = true
+        gameVM.jokerEnabled = true
         item.icon.alpha = 255
         item.isEnabled = true
     }

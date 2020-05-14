@@ -43,12 +43,10 @@ class GameViewModel : ViewModel() {
                             "It continues the nearest enclosing loop" to false,
                             "It terminates the function recursion" to false,
                             "It terminates the database call" to false)),
-
             Question(text = "Which of the following function convert a string to a float in python?",
                     difficult = Level.MEDIUM,
                     type = QuestionType.MULTIPLE_CHOICE,
-                    answers = mapOf("int(x, [base])" to false, "long(x, [base])" to false, "float(x)" to true, "str(x)" to false))
-            ,
+                    answers = mapOf("int(x, [base])" to false, "long(x, [base])" to false, "float(x)" to true, "str(x)" to false)),
             Question(text = "Python distinguishes between these number types:",
                     difficult = Level.MEDIUM,
                     type = QuestionType.MULTIPLE_CHOICE,
