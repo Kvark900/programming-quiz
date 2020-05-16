@@ -1,16 +1,19 @@
 package ba.unsa.pmf.settings
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import ba.unsa.pmf.R
 import ba.unsa.pmf.databinding.FragmentGameLevelBinding
-import ba.unsa.pmf.databinding.FragmentGameSettingsBinding
 
 class GameLevelFragment : Fragment() {
     private lateinit var binding: FragmentGameLevelBinding
@@ -49,7 +52,9 @@ class GameLevelFragment : Fragment() {
                 || super.onOptionsItemSelected(item)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun setTitle() {
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_settings)
+        val fromHtml = Html.fromHtml(getString(R.string.title_settings), FROM_HTML_MODE_LEGACY)
+        (activity as AppCompatActivity).supportActionBar?.title = Html.fromHtml(fromHtml.toString())
     }
 }

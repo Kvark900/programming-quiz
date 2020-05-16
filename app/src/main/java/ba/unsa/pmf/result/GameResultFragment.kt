@@ -12,6 +12,7 @@ import ba.unsa.pmf.R
 import ba.unsa.pmf.databinding.FragmentGameResultBinding
 import ba.unsa.pmf.game.GameViewModel
 import ba.unsa.pmf.settings.GameSettingsViewModel
+import kotlin.math.round
 
 class GameResultFragment : Fragment() {
     private val gameViewModel: GameViewModel by activityViewModels()
@@ -24,14 +25,8 @@ class GameResultFragment : Fragment() {
         val binding: FragmentGameResultBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_game_result, container, false)
 
-        val numberOfQuestions = gameSettingsViewModel.settings.numberOfQuestions.number
-        val numOfCorrectAnswers = gameViewModel.numOfCorrectAnswers
-        val percent = numOfCorrectAnswers.toDouble() / numberOfQuestions * 100
-        resultMessageText = "${numOfCorrectAnswers}/${numberOfQuestions} correct answers"
+        setResultsMessages(binding)
         setTittle()
-
-        binding.resultMessage.text = resultMessageText
-        binding.percentageText.text = "${percent}%"
         binding.nextMatchButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_gameResultFragment_to_gameLevelFragment)
             resetGameData()
@@ -57,6 +52,16 @@ class GameResultFragment : Fragment() {
         return true
     }
 
+    private fun setResultsMessages(binding: FragmentGameResultBinding) {
+        val numberOfQuestions = gameSettingsViewModel.settings.numberOfQuestions.number
+        val numOfCorrectAnswers = gameViewModel.numOfCorrectAnswers
+        val percent = (numOfCorrectAnswers.toDouble() / numberOfQuestions * 100).round(2)
+        resultMessageText = getString(R.string.num_of_correct_answers, numOfCorrectAnswers, numberOfQuestions)
+        binding.resultMessage.text = resultMessageText
+        binding.percentageText.text = getString(R.string.percentage, percent)
+        if (!gameViewModel.jokerEnabled) binding.jokerMessage.text = getString(R.string.joker_was_used)
+    }
+
     private fun setTittle() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_results)
     }
@@ -65,5 +70,11 @@ class GameResultFragment : Fragment() {
         gameViewModel.numOfCorrectAnswers = 0
         gameViewModel.questionIndex = 0
         gameViewModel.jokerEnabled = true
+    }
+
+    private fun Double.round(decimals: Int): Double {
+        var multiplier = 1.0
+        repeat(decimals) { multiplier *= 10 }
+        return round(this * multiplier) / multiplier
     }
 }

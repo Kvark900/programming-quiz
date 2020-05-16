@@ -15,9 +15,10 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="260dp"
-        android:layout_height="59dp"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="BROJ PITANJA"
+        android:text="@string/numOfQuesitons"
+        android:textAlignment="center"
         android:textColor="#4f5b66"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -26,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.082" />
+        app:layout_constraintVertical_bias="0.021" />
 
     <RadioGroup
         android:id="@+id/numOfQuestionsRadioGroup"
@@ -49,7 +50,7 @@
           android:layout_height="53dp"
           android:layout_marginBottom="@dimen/question_vertical_margin"
           android:checked="true"
-          android:text="5"
+          android:text="@string/five"
           android:textColor="#4f5b66"
           android:textSize="24sp"
           android:textStyle="bold"
@@ -60,7 +61,7 @@
           android:layout_width="match_parent"
           android:layout_height="53dp"
           android:layout_marginBottom="@dimen/question_vertical_margin"
-          android:text="10"
+          android:text="@string/ten"
           android:textColor="#4f5b66"
           android:textSize="24sp"
           android:textStyle="bold"
@@ -71,7 +72,7 @@
           android:layout_width="match_parent"
           android:layout_height="53dp"
           android:layout_marginBottom="@dimen/question_vertical_margin"
-          android:text="15"
+          android:text="@string/fifteen"
           android:textColor="#4f5b66"
           android:textSize="24sp"
           android:textStyle="bold"
@@ -87,15 +88,16 @@
         android:layout_marginEnd="@dimen/horizontal_margin"
         android:paddingStart="@dimen/button_padding"
         android:paddingEnd="@dimen/button_padding"
-        android:text="PLAY"
+        android:text="@string/play"
         android:textColor="	#4f5b66"
         android:textSize="@dimen/button_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numOfQuestionsRadioGroup"
-        app:layout_constraintVertical_bias="0.206" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>

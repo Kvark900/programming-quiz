@@ -87,6 +87,19 @@
             tools:text="A function or method which is defined using async def is called a coroutine function." />
       </LinearLayout>
 
+      <EditText
+          android:id="@+id/textAnswer"
+          android:layout_width="327dp"
+          android:layout_height="86dp"
+          android:ems="10"
+          android:inputType="textPersonName"
+          android:visibility="gone"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/questionText"
+          app:layout_constraintVertical_bias="0.231" />
+
       <Button
           android:id="@+id/submitButton"
           android:layout_width="wrap_content"

@@ -87,7 +87,7 @@ class GameFragment : Fragment() {
 
     private fun renderQuestion() {
         val isOpen = gameVM.currentQuestion.type == GameViewModel.QuestionType.OPEN
-        binding.checkboxGroup.visibility  = if (isOpen) GONE else VISIBLE
+        binding.checkboxGroup.visibility = if (isOpen) GONE else VISIBLE
         binding.textAnswer?.visibility = if (isOpen) VISIBLE else GONE
         val params = binding.submitButton.layoutParams as ConstraintLayout.LayoutParams
         params.topToBottom = if (isOpen) binding.textAnswer?.id!! else binding.checkboxGroup.id

@@ -1,20 +1,14 @@
 <resources>
   <string name="app_name">PMF Quiz</string>
-  <string name="game_over">Game Over</string>
-  <string name="try_again">Try Again?</string>
-  <string name="position">Position</string>
-  <string name="select_an_avatar">Select an Avatar</string>
-  <string name="android_trivia">Android Trivia</string>
   <string name="about_text">Android Trivia will help remind you of important concepts you have learned and will learn in Android development.\n\nConsider modifying the questions and graphics to make this game your own!</string>
   <string name="rules_text">Select the answer from the options given. Each time you get an answer correct, you advance to the next question.\n\nIf you get the answer wrong, your game ends! You can return to the title screen using up or back from within the game screen, and this will also end your game.</string>
   <string name="rules">Rules</string>
   <string name="pmfClassroom">PMF Classroom</string>
   <string name="pythonDocs">Python Documentation</string>
   <string name="about">About</string>
-  <string name="trivia_hint">Trivia Hint</string>
   <string name="title_programming_question">Programming Quiz (%1$d/%2$d)</string>
   <string name="title_results">Results</string>
-  <string name="title_settings">Settings</string>
+  <string name="title_settings"><span><code style="background: #e4e6e8;">Settings</code></span></string>
   <string name="title_about_trivia">About Trivia</string>
   <string name="title_trivia_rules">Trivia Rules</string>
   <string name="share_success_text">I mastered #UdacityAndroidTrivia with %1$d/%2$d correct questions!</string>
@@ -22,7 +16,120 @@
   <string name="congratulations">Congratulations!</string>
   <string name="share">Share</string>
   <string name="sharing_not_available">Sharing Not Available</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="level">LEVEL</string>
+  <string name="easy">Easy</string>
+  <string name="medium">Medium</string>
+  <string name="hard">Hard</string>
+  <string name="next">NEXT</string>
+  <string name="numOfQuesitons">NUMBER OF QUESTIONS</string>
+  <string name="five">5</string>
+  <string name="ten">10</string>
+  <string name="fifteen">15</string>
+  <string name="play">PLAY</string>
+  <string name="play_again">Play Again</string>
+  <string name="num_of_correct_answers">%1$d/%2$d correct answers</string>
+  <string name="percentage">Percentage: %1$.2f.%%</string>
+
+
+  <!--questions-->
+  <!--<![CDATA[ …raw html… ]]>-->
+  <string name="question1"><span style="background: purple">Which of these is not a core data type?</span></string>
+  <string name="question2" ><![CDATA[ <span>What data type is the object below?
+  <code style="background: #e4e6e8;">L = [1, 23, ‘hello’, 1]</code></span> ]]>
+  </string>
+  <string name="question3"><![CDATA[ <span>What does <code style="background: #e4e6e8;">break</code> statement</span> ]]>\n  </string>
+  <string name="question4"><![CDATA[ <span>What is <code style="background: #e4e6e8;">pass</code> statement</span> ]]>\n  </string>
+  <string name="question5"><![CDATA[ <span>What does <code style="background: #e4e6e8;">continue</code> statement</span> ]]>\n  </string>
+  <string name="question6">______ expressions are used to create anonymous functions.</string>
+  <string name="question7">The <code style="background: #e4e6e8;">\'&amp;\'</code> operator yields the bitwise ___ of its arguments, which must be integers.</string>
+  <string name="question8">The <code style="background: #e4e6e8;">\'/\'</code> (division) and \'//\' (floor division) operators yield the ________ of their arguments</string>
+  <string name="question9">The <code style="background: #e4e6e8;">\'^\'</code> operator yields the bitwise ___ of its arguments, which must be integers.</string>
+  <string name="question10">Which of the following function convert a string to a float in python</string>
+  <string name="question11">Python distinguishes between these number types:</string>
+  <string name="question12">There are currently two intrinsic set types:</string>
+  <string name="question13">Which of these are mapping types?</string>
+  <string name="question14">What are <code>sets</code>?</string>
+  <string name="question15">Which operator is overloaded by the or() function?</string>
+  <string name="question16">The following types are immutable sequences?</string>
+  <string name="question17">There are currently two intrinsic mutable sequence types:</string>
+  <string name="question18">What are mappings?</string>
+  <string name="question19" >What are callable types</string>
+  <string name="question20">What are <code style="background: grey">\'coroutine\'</code> functions?</string>
+
+
+<!--answers-->
+  <string name="q1a1" >Lists</string>
+  <string name="q1a2" >Dictionary</string>
+  <string name="q1a3" >Tuples</string>
+  <string name="q1a4" >Class</string>
+  <string name="q2a1" >List</string>
+  <string name="q2a2" >Dictionary</string>
+  <string name="q2a3" >Tuple</string>
+  <string name="q2a4" >Array</string>
+  <string name="q3a1" >It terminates the nearest enclosing loop</string>
+  <string name="q3a2" >It continues the nearest enclosing loop</string>
+  <string name="q3a3" >It terminates REST API call</string>
+  <string name="q3a4" >It terminates the database call</string>
+  <string name="q4a1" >pass is a null operation — when it is executed, nothing happens</string>
+  <string name="q4a2" >pass is recursive function call</string>
+  <string name="q4a3" >pass terminates function execution</string>
+  <string name="q4a4" >pass terminates loop</string>
+  <string name="q5a1" >It continues with the next cycle of the nearest enclosing loop</string>
+  <string name="q5a2" >It continues with the next cycle of the nearest function</string>
+  <string name="q5a3" >It continues function recursion</string>
+  <string name="q5a4" >It breaks the next cycle of the nearest enclosing loop</string>
+  <string name="q6a1" >Lambda</string>
+  <string name="q7a1" >and</string>
+  <string name="q8a1" >quotient</string>
+  <string name="q9a1" >XOR</string>
+  <string name="q9a2" >exclusive OR</string>
+  <string name="q10a1" >int(x, [base])</string>
+  <string name="q10a2" >long(x, [base])</string>
+  <string name="q10a3" >float(x)</string>
+  <string name="q10a4" >str(x)</string>
+  <string name="q11a1" >integer</string>
+  <string name="q11a2" >float</string>
+  <string name="q11a3" >complex</string>
+  <string name="q11a4" >bytes</string>
+  <string name="q12a1" >Sets</string>
+  <string name="q12a2" >Frozen sets</string>
+  <string name="q12a3" >List</string>
+  <string name="q12a4" >Dictionaries</string>
+  <string name="q13a1" >Dictionaries</string>
+  <string name="q13a2" >Sets</string>
+  <string name="q13a3" >Lists</string>
+  <string name="q13a4" >Tuples</string>
+  <string name="q14a1" >These represent unordered, finite sets of unique, immutable objects</string>
+  <string name="q14a2" >These represent ordered, finite sets of unique, immutable objects</string>
+  <string name="q14a3" >These represent ordered, infinite sets of unique, immutable objects</string>
+  <string name="q14a4" >These represent unordered, finite sets of unique, mutable objects</string>
+  <string name="q15a1" >||</string>
+  <string name="q15a2" >|</string>
+  <string name="q15a3" >//</string>
+  <string name="q15a4" >/</string>
+  <string name="q16a1" >Strings</string>
+  <string name="q16a2" >Tuples</string>
+  <string name="q16a3" >Bytes</string>
+  <string name="q16a4" >Lists</string>
+  <string name="q17a1" >Lists</string>
+  <string name="q17a2" >Byte Arrays</string>
+  <string name="q17a3" >Tuples</string>
+  <string name="q17a4" >Strings</string>
+  <string name="q18a1" >These represent finite sets of objects indexed by arbitrary index sets</string>
+  <string name="q18a2" >These represent infinite sets of objects indexed by arbitrary index sets</string>
+  <string name="q18a3" >These represent finite lists of objects indexed by arbitrary index lists</string>
+  <string name="q18a4" >These represent finite tuples of objects indexed by arbitrary index tuples</string>
+  <string name="q19a1" >These are the types to which the function call operation can be applied</string>
+  <string name="q19a2" >These are the types to which the function call operation can not be applied</string>
+  <string name="q19a3" >These are the types to which the database call operation can be applied</string>
+  <string name="q19a4" >These are the types to which the network call operation can be applied</string>
+  <string name="q20a1" >A function or method which is defined using async def is called a coroutine function.</string>
+  <string name="q20a2" >A function or method which is defined using inheritance is called a coroutine function.</string>
+  <string name="q20a3" >A function or method which is defined using database call is called a coroutine function.</string>
+  <string name="q20a4" >A function or method which is defined using network call is called a coroutine function.</string>
+  <string name="joker_was_not_used">Joker was not used</string>
+  <string name="joker_was_used">Joker \"Ask friend\" was used</string>
+
+
 </resources>
